@@ -1,0 +1,10 @@
+[package]
+name = "cart_lin"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[dev-dependencies]
+nalgebra = "0.32"
+ndarray = "0.16"
