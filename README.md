@@ -4,16 +4,16 @@ A library for converting between linear and cartesian indices.
 
 This library offers the following functions for conversion between linear
 and cartesian indices for any number of dimensions:
-- [`cart_to_lin`] and [`cart_to_lin_unchecked`]: Convert a cartesian index (e.g. `[1, 2, 5]`
+- `cart_to_lin` and `cart_to_lin_unchecked`: Convert a cartesian index (e.g. `[1, 2, 5]`
 for a three-dimensional matrix) into a linear index (i.e. the position in the
 underlying contiguous memory).
-- [`lin_to_cart`] and [`lin_to_cart_unchecked`]: Convert a linear index into a cartesian index.
-- [`lin_to_cart_dyn`] and [`lin_to_cart_dyn_unchecked`]: These variations of `lin_to_cart`
+- `lin_to_cart` and `lin_to_cart_unchecked`: Convert a linear index into a cartesian index.
+- `lin_to_cart_dyn` and `lin_to_cart_dyn_unchecked`: These variations of `lin_to_cart`
 write the calculated cartesian indices into a caller-provided slice buffer instead of
 returning an index array.
 
-Additionally, [`CartesianIndices`] provides an iterator over cartesian indices which can be seen
-as the multidimensional equivalent of the [`Range`](<https://doc.rust-lang.org/std/ops/struct.Range.html>) iterator.
+Additionally, `CartesianIndices` provides an iterator over cartesian indices which can be seen
+as the multidimensional equivalent of the `Range`(<https://doc.rust-lang.org/std/ops/struct.Range.html>) iterator.
 
 ## Cartesian to linear index conversion
 
@@ -58,13 +58,13 @@ assert_eq!(cart_to_lin(&[0, 2, 0], &dim_size).unwrap(), 4);
 assert_eq!(cart_to_lin(&[0, 2, 1], &dim_size).unwrap(), 5);
 assert_eq!(cart_to_lin(&[1, 0, 0], &dim_size).unwrap(), 6);
 ```
-[`cart_to_lin`] checks whether the given cartesian index is valid for the specified number of dimensions.
-In order to avoid this check, use [`cart_to_lin_unchecked`] (which is not unsafe, but might return
+`cart_to_lin` checks whether the given cartesian index is valid for the specified number of dimensions.
+In order to avoid this check, use `cart_to_lin_unchecked` (which is not unsafe, but might return
 invalid indices).
 
 ## Linear to cartesian conversion
 
-The inverse of [`cart_to_lin`] is [`lin_to_cart`]:
+The inverse of `cart_to_lin` is `lin_to_cart`:
 ```rust
 use cart_lin::lin_to_cart;
 
@@ -94,7 +94,7 @@ assert_eq!(cartiter.next(), Some([1, 2]));
 assert_eq!(cartiter.next(), None);
 ```
 
-[`CartesianIndices`] can also be constructed by defining lower and upper bounds for each axis.
+`CartesianIndices` can also be constructed by defining lower and upper bounds for each axis.
 The following example is functionally equivalent to the previous one:
 ```rust
 use cart_lin::CartesianIndices;
