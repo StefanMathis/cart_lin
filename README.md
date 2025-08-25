@@ -1,3 +1,5 @@
+# cart_lin
+
 A library for converting between linear and cartesian indices.
 
 This library offers the following functions for conversion between linear
@@ -13,7 +15,7 @@ returning an index array.
 Additionally, [`CartesianIndices`] provides an iterator over cartesian indices which can be seen
 as the multidimensional equivalent of the [`Range`](<https://doc.rust-lang.org/std/ops/struct.Range.html>) iterator.
 
-# Cartesian to linear index conversion
+## Cartesian to linear index conversion
 
 Let's use the following 2x3 matrix (two rows, three columns) as an example:
 
@@ -60,7 +62,7 @@ assert_eq!(cart_to_lin(&[1, 0, 0], &dim_size).unwrap(), 6);
 In order to avoid this check, use [`cart_to_lin_unchecked`] (which is not unsafe, but might return
 invalid indices).
 
-# Linear to cartesian conversion
+## Linear to cartesian conversion
 
 The inverse of [`cart_to_lin`] is [`lin_to_cart`]:
 ```rust
@@ -77,7 +79,7 @@ assert_eq!(lin_to_cart(4, &dim_size).unwrap(), [1, 1]);
 assert_eq!(lin_to_cart(5, &dim_size).unwrap(), [1, 2]);
 ```
 
-# Iterate over cartesian indices
+## Iterate over cartesian indices
 
 ```rust
 use cart_lin::CartesianIndices;
