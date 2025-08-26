@@ -141,4 +141,3 @@ assert_eq!(cartiter.next(), None);
 
 The `tests` directory contains examples on how to use this library together with [nalgebra](https://crates.io/crates/nalgebra) and [ndarray](https://crates.io/crates/ndarray).
 However, neither of those libraries is a dependency of `cart_lin`.
-*/
