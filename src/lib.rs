@@ -1,5 +1,5 @@
 /*!
-A library for converting between linear and cartesian indices.
+A lightweight library for converting between linear and cartesian indices for any number of dimensions.
 
 This library offers the following functions for conversion between linear
 and cartesian indices for any number of dimensions:
@@ -14,7 +14,9 @@ returning an index array.
 Additionally, [`CartesianIndices`] provides an iterator over cartesian indices which can be seen
 as the multidimensional equivalent of the [`Range`](<https://doc.rust-lang.org/std/ops/struct.Range.html>) iterator.
 
-# Cartesian to linear index conversion
+This library has no dependencies besides the Rust stdlib and is therefore very lightweight.
+
+# Cartesian to linear conversion
 
 Let's use the following 2x3 matrix (two rows, three columns) as an example:
 
@@ -83,6 +85,7 @@ assert_eq!(lin_to_cart(5, &dim_size).unwrap(), [1, 2]);
 ```
 use cart_lin::CartesianIndices;
 
+// Two dimensions (2 x 3 matrix)
 let mut cartiter = CartesianIndices::new([2, 3]);
 assert_eq!(cartiter.next(), Some([0, 0]));
 assert_eq!(cartiter.next(), Some([0, 1]));
@@ -91,6 +94,19 @@ assert_eq!(cartiter.next(), Some([1, 0]));
 assert_eq!(cartiter.next(), Some([1, 1]));
 assert_eq!(cartiter.next(), Some([1, 2]));
 assert_eq!(cartiter.next(), None);
+
+// Four dimensions (2 x 2 x 2 x 2 matrix)
+let mut cartiter = CartesianIndices::new([2, 2, 2, 2]);
+assert_eq!(cartiter.next(), Some([0, 0, 0, 0]));
+assert_eq!(cartiter.next(), Some([0, 0, 0, 1]));
+assert_eq!(cartiter.next(), Some([0, 0, 1, 0]));
+assert_eq!(cartiter.next(), Some([0, 0, 1, 1]));
+assert_eq!(cartiter.next(), Some([0, 1, 0, 0]));
+assert_eq!(cartiter.next(), Some([0, 1, 0, 1]));
+assert_eq!(cartiter.next(), Some([0, 1, 1, 0]));
+assert_eq!(cartiter.next(), Some([0, 1, 1, 1]));
+assert_eq!(cartiter.next(), Some([1, 0, 0, 0]));
+// ...
 ```
 
 [`CartesianIndices`] can also be constructed by defining lower and upper bounds for each axis.
@@ -121,6 +137,11 @@ assert_eq!(cartiter.next(), Some([2, 3]));
 assert_eq!(cartiter.next(), Some([2, 4]));
 assert_eq!(cartiter.next(), None);
 ```
+
+# Usage with matrix library
+
+The `tests` directory contains examples on how to use this library together with [nalgebra](https://crates.io/crates/nalgebra) and [ndarray](https://crates.io/crates/ndarray).
+However, neither of those libraries is a dependency of `cart_lin`.
 */
 
 /**
@@ -185,8 +206,7 @@ pub fn cart_to_lin(indices: &[usize], dim_size: &[usize]) -> Option<usize> {
 Like [`cart_to_lin`], but without the checks.
 
 Despite the name, this function itself is safe. However, the index received from this function might be invalid. Using
-such an invalid index to perform an unsafe operation on a matrix structure of a matrix library (e.g. `matrix.get_unchecked`)
-causes an out-of-bounds read and is therefore undefined behaviour.
+such an invalid index may cause an out-of-bounds read.
 ```
 use cart_lin::{cart_to_lin, cart_to_lin_unchecked};
 
@@ -239,8 +259,7 @@ pub fn lin_to_cart<const N: usize>(index: usize, dim_size: &[usize; N]) -> Optio
 Like [`lin_to_cart`], but without the checks.
 
 Despite the name, this function itself is safe. However, the index received from this function might be invalid. Using
-such an invalid index to perform an unsafe operation on a matrix structure of a matrix library (e.g. `matrix.get_unchecked`)
-causes an out-of-bounds read and is therefore undefined behaviour.
+such an invalid index may cause an out-of-bounds read.
 ```
 use cart_lin::{lin_to_cart, lin_to_cart_unchecked};
 
@@ -366,7 +385,7 @@ impl<const N: usize> CartesianIndices<N> {
             limits[1] = dim;
         }
 
-        return Self::with_offsets_unchecked(bounds);
+        return Self::from_bounds_unchecked(bounds);
     }
 
     /**
@@ -405,17 +424,16 @@ impl<const N: usize> CartesianIndices<N> {
             }
         }
 
-        return Some(Self::with_offsets_unchecked(bounds));
+        return Some(Self::from_bounds_unchecked(bounds));
     }
 
     /**
     Like [`Self::from_bounds`], but without the checks.
 
     Despite the name, this function itself is safe. However, the index received from this function might be invalid. Using
-    such an invalid index to perform an unsafe operation on a matrix structure of a matrix library (e.g. `matrix.get_unchecked`)
-    causes an out-of-bounds read and is therefore undefined behaviour.
+    such an invalid index may cause an out-of-bounds read.
     */
-    pub fn with_offsets_unchecked(bounds: [[usize; 2]; N]) -> Self {
+    pub fn from_bounds_unchecked(bounds: [[usize; 2]; N]) -> Self {
         let mut max = 1;
         let mut limit_deltas = [0; N];
         for (limits, delta) in bounds.iter().zip(limit_deltas.iter_mut()) {
