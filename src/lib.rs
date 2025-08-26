@@ -428,7 +428,7 @@ impl<const N: usize> CartesianIndices<N> {
     }
 
     /**
-    Like [`Self::from_bounds`], but without the checks.
+    Like [`CartesianIndices::from_bounds`], but without the checks.
 
     Despite the name, this function itself is safe. However, the index received from this function might be invalid. Using
     such an invalid index may cause an out-of-bounds read.

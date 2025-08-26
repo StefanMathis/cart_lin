@@ -5,7 +5,7 @@ edition = "2024"
 description = "Conversion between cartesian and linear indices"
 readme = "README.md"
 license  = "MIT OR Apache-2.0"
-repository = "https://github.com/StefanMathis/cart_lin"
+repository = "https://github.com/StefanMathis/cart_lin.git"
 
 [dependencies]
 
