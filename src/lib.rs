@@ -138,7 +138,7 @@ assert_eq!(cartiter.next(), Some([2, 4]));
 assert_eq!(cartiter.next(), None);
 ```
 
-# Usage with matrix library
+# Usage with matrix libraries
 
 The `tests` directory contains examples on how to use this library together with [nalgebra](https://crates.io/crates/nalgebra) and [ndarray](https://crates.io/crates/ndarray).
 However, neither of those libraries is a dependency of `cart_lin`.
