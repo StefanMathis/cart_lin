@@ -1,19 +1,32 @@
+cart_lin
+========
+
 A lightweight library for converting between linear and cartesian indices for any number of dimensions.
+
+[`cart_to_lin`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.cart_to_lin.html
+[`cart_to_lin_unchecked`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.cart_to_lin_unchecked.html
+[`lin_to_cart`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.lin_to_cart.html
+[`lin_to_cart_unchecked`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.lin_to_cart_unchecked.html
+[`lin_to_cart_dyn`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.lin_to_cart_dyn.html
+[`lin_to_cart_dyn_unchecked`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.lin_to_cart_dyn_unchecked.html
+[`CartesianIndices`]: https://docs.rs/cart_lin/*/cart_lin/struct.CartesianIndices.html
 
 This library offers the following functions for conversion between linear
 and cartesian indices for any number of dimensions:
-- `cart_to_lin` and `cart_to_lin_unchecked`: Convert a cartesian index (e.g. `[1, 2, 5]`
+- [`cart_to_lin`] and [`cart_to_lin_unchecked`]: Convert a cartesian index (e.g. `[1, 2, 5]`
 for a three-dimensional matrix) into a linear index (i.e. the position in the
 underlying contiguous memory).
-- `lin_to_cart` and `lin_to_cart_unchecked`: Convert a linear index into a cartesian index.
-- `lin_to_cart_dyn` and `lin_to_cart_dyn_unchecked`: These variations of `lin_to_cart`
-write the calculated cartesian indices into a caller-provided slice buffer instead of
+- [`lin_to_cart`] and [`lin_to_cart_unchecked`]: Convert a linear index into a cartesian index.
+- [`lin_to_cart_dyn`] and [`lin_to_cart_dyn_unchecked`]: These variants of [`lin_to_cart`]
+write the calculated cartesian indices into a caller-provided slice instead of
 returning an index array.
 
-Additionally, `CartesianIndices` provides an iterator over cartesian indices which can be seen
-as the multidimensional equivalent of the [`Range`](<https://doc.rust-lang.org/std/ops/struct.Range.html>) iterator.
+Additionally, [`CartesianIndices`] provides an iterator over cartesian indices which can be seen
+as the multidimensional equivalent of the [`Range`](https://doc.rust-lang.org/std/ops/struct.Range.html) iterator.
 
 This library has no dependencies besides the Rust stdlib and is therefore very lightweight.
+
+The full API documentation is available at [https://docs.rs/cart_lin/0.2.1/cart_lin/](https://docs.rs/cart_lin/0.2.1/cart_lin/).
 
 # Cartesian to linear conversion
 
@@ -25,7 +38,7 @@ Let's use the following 2x3 matrix (two rows, three columns) as an example:
 ```
 
 The cartesian index of element `0` is `[0, 0]`, that of `1` is `[0, 1]`, that of `5` is `[1, 2]` and so on.
-`cart_to_lin` (as well as all other functions of this library) uses row-major order
+[`cart_to_lin`] (as well as all other functions of this library) uses row-major order
 (= last index changes fastest).
 ```
 use cart_lin::cart_to_lin;
@@ -58,13 +71,13 @@ assert_eq!(cart_to_lin(&[0, 2, 0], &dim_size).unwrap(), 4);
 assert_eq!(cart_to_lin(&[0, 2, 1], &dim_size).unwrap(), 5);
 assert_eq!(cart_to_lin(&[1, 0, 0], &dim_size).unwrap(), 6);
 ```
-`cart_to_lin` checks whether the given cartesian index is valid for the specified number of dimensions.
-In order to avoid this check, use `cart_to_lin_unchecked` (which is not unsafe, but might return
+[`cart_to_lin`] checks whether the given cartesian index is valid for the specified number of dimensions.
+In order to avoid this check, use [`cart_to_lin_unchecked`] (which is not unsafe, but might return
 invalid indices).
 
 # Linear to cartesian conversion
 
-The inverse of `cart_to_lin` is `lin_to_cart`:
+The inverse of [`cart_to_lin`] is [`lin_to_cart`]:
 ```
 use cart_lin::lin_to_cart;
 
@@ -108,7 +121,7 @@ assert_eq!(cartiter.next(), Some([1, 0, 0, 0]));
 // ...
 ```
 
-`CartesianIndices` can also be constructed by defining lower and upper bounds for each axis.
+[`CartesianIndices`] can also be constructed by defining lower and upper bounds for each axis.
 The following example is functionally equivalent to the previous one:
 ```
 use cart_lin::CartesianIndices;
