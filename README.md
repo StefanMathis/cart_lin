@@ -9,7 +9,7 @@ A lightweight library for converting between linear and cartesian indices for an
 [`lin_to_cart_unchecked`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.lin_to_cart_unchecked.html
 [`lin_to_cart_dyn`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.lin_to_cart_dyn.html
 [`lin_to_cart_dyn_unchecked`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.lin_to_cart_dyn_unchecked.html
-[`CartesianIndices`]: https://docs.rs/cart_lin/*/cart_lin/struct.CartesianIndices.html
+[`CartesianIndices`]: https://docs.rs/cart_lin/0.2.1/cart_lin/struct.CartesianIndices.html
 
 This library offers the following functions for conversion between linear
 and cartesian indices for any number of dimensions:
@@ -40,7 +40,7 @@ Let's use the following 2x3 matrix (two rows, three columns) as an example:
 The cartesian index of element `0` is `[0, 0]`, that of `1` is `[0, 1]`, that of `5` is `[1, 2]` and so on.
 [`cart_to_lin`] (as well as all other functions of this library) uses row-major order
 (= last index changes fastest).
-```
+```rust
 use cart_lin::cart_to_lin;
 
 // Rows, columns
@@ -52,12 +52,11 @@ assert_eq!(cart_to_lin(&[0, 2], &dim_size).unwrap(), 2);
 assert_eq!(cart_to_lin(&[1, 0], &dim_size).unwrap(), 3);
 assert_eq!(cart_to_lin(&[1, 1], &dim_size).unwrap(), 4);
 assert_eq!(cart_to_lin(&[1, 2], &dim_size).unwrap(), 5);
-
 ```
 
 For higher-dimensional matrices, it works in the same way (using the example of a matrix
 with 4 rows, 3 columns and 2 pages):
-```
+```rust
 use cart_lin::cart_to_lin;
 
 // Rows, columns, pages
@@ -78,7 +77,7 @@ invalid indices).
 # Linear to cartesian conversion
 
 The inverse of [`cart_to_lin`] is [`lin_to_cart`]:
-```
+```rust
 use cart_lin::lin_to_cart;
 
 // Rows, columns
@@ -94,7 +93,7 @@ assert_eq!(lin_to_cart(5, &dim_size).unwrap(), [1, 2]);
 
 # Iterate over cartesian indices
 
-```
+```rust
 use cart_lin::CartesianIndices;
 
 // Two dimensions (2 x 3 matrix)
@@ -123,7 +122,8 @@ assert_eq!(cartiter.next(), Some([1, 0, 0, 0]));
 
 [`CartesianIndices`] can also be constructed by defining lower and upper bounds for each axis.
 The following example is functionally equivalent to the previous one:
-```
+
+```rust
 use cart_lin::CartesianIndices;
 
 let mut cartiter = CartesianIndices::from_bounds([[0, 2], [0, 3]]).expect("bounds must be strictly monotonic increasing");
@@ -137,7 +137,7 @@ assert_eq!(cartiter.next(), None);
 ```
 
 But it is also possible to add offsets via the lower bounds:
-```
+```rust
 use cart_lin::CartesianIndices;
 
 let mut cartiter = CartesianIndices::from_bounds([[1, 3], [2, 5]]).expect("bounds must be strictly monotonic increasing");
