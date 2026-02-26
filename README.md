@@ -13,20 +13,28 @@ A lightweight library for converting between linear and cartesian indices for an
 
 This library offers the following functions for conversion between linear
 and cartesian indices for any number of dimensions:
-- [`cart_to_lin`] and [`cart_to_lin_unchecked`]: Convert a cartesian index (e.g. `[1, 2, 5]`
-for a three-dimensional matrix) into a linear index (i.e. the position in the
-underlying contiguous memory).
-- [`lin_to_cart`] and [`lin_to_cart_unchecked`]: Convert a linear index into a cartesian index.
-- [`lin_to_cart_dyn`] and [`lin_to_cart_dyn_unchecked`]: These variants of [`lin_to_cart`]
-write the calculated cartesian indices into a caller-provided slice instead of
-returning an index array.
+- [`cart_to_lin`] and [`cart_to_lin_unchecked`]: Convert a cartesian index (e.g.
+`[1, 2, 5]` for a three-dimensional matrix) into a linear index (i.e. the
+position in the underlying contiguous memory).
+- [`lin_to_cart`] and [`lin_to_cart_unchecked`]: Convert a linear index into a
+cartesian index.
+- [`lin_to_cart_dyn`] and [`lin_to_cart_dyn_unchecked`]: These variants of
+[`lin_to_cart`] write the calculated cartesian indices into a caller-provided
+slice instead of returning an index array.
 
-Additionally, [`CartesianIndices`] provides an iterator over cartesian indices which can be seen
-as the multidimensional equivalent of the [`Range`](https://doc.rust-lang.org/std/ops/struct.Range.html) iterator.
+Additionally, [`CartesianIndices`] provides an iterator over cartesian indices
+which can be seen as the multidimensional equivalent of the
+[`Range`](https://doc.rust-lang.org/std/ops/struct.Range.html) iterator.
 
-This library has no dependencies besides the Rust stdlib and is therefore very lightweight.
+This library has no dependencies besides the Rust stdlib and is therefore very
+lightweight.
 
-The full API documentation is available at [https://docs.rs/cart_lin/0.2.1/cart_lin/](https://docs.rs/cart_lin/0.2.1/cart_lin/).
+The full API documentation is available at
+[https://docs.rs/cart_lin/0.2.1/cart_lin/](https://docs.rs/cart_lin/0.2.1/cart_lin/).
+
+> **Feedback welcome!**  
+> Found a bug, missing docs, or have a feature request?  
+> Please open an issue on GitHub.
 
 # Cartesian to linear conversion
 
