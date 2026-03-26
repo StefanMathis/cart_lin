@@ -1,8 +1,6 @@
 cart_lin
 ========
 
-A lightweight library for converting between linear and cartesian indices for any number of dimensions.
-
 [`cart_to_lin`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.cart_to_lin.html
 [`cart_to_lin_unchecked`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.cart_to_lin_unchecked.html
 [`lin_to_cart`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.lin_to_cart.html
@@ -10,6 +8,16 @@ A lightweight library for converting between linear and cartesian indices for an
 [`lin_to_cart_dyn`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.lin_to_cart_dyn.html
 [`lin_to_cart_dyn_unchecked`]: https://docs.rs/cart_lin/0.2.1/cart_lin/fn.lin_to_cart_dyn_unchecked.html
 [`CartesianIndices`]: https://docs.rs/cart_lin/0.2.1/cart_lin/struct.CartesianIndices.html
+
+[![Documentation](https://docs.rs/cart_lin/badge.svg)](https://docs.rs/cart_lin)
+
+A lightweight library for converting between linear and cartesian indices for any number of dimensions.
+
+The full API documentation is available at https://docs.rs/cart_lin/0.2.1//cart_lin.
+
+> **Feedback welcome!**  
+> Found a bug, missing docs, or have a feature request?  
+> Please open an issue on GitHub.
 
 This library offers the following functions for conversion between linear
 and cartesian indices for any number of dimensions:
