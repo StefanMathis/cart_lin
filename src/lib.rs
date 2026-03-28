@@ -1,4 +1,17 @@
-#![doc = include_str!("../README.md")]
+/*!
+[`cart_to_lin`]: crate::cart_to_lin
+[`cart_to_lin_unchecked`]: crate::cart_to_lin_unchecked
+[`lin_to_cart`]: crate::lin_to_cart
+[`lin_to_cart_unchecked`]: crate::lin_to_cart_unchecked
+[`lin_to_cart_dyn`]: crate::lin_to_cart_dyn
+[`lin_to_cart_dyn_unchecked`]: crate::lin_to_cart_dyn_unchecked
+[`CartesianIndices`]: crate::CartesianIndices
+[`Range`]: std::ops::Range
+
+A lightweight library for converting between linear and cartesian indices for any number of dimensions.
+
+ */
+#![doc = include_str!("../docs/main.md")]
 
 /**
 Check whether the given indices are valid. This is the case if the length of `indices`
@@ -197,7 +210,8 @@ pub fn lin_to_cart_dyn_unchecked(index: usize, dim_size: &[usize], cart_indices:
     // Make the index mutable
     let mut index = index;
 
-    // Fill up the indices from back to front by performing modulo and truncating integer divisons
+    // Fill up the indices from back to front by performing modulo and truncating
+    // integer divisons
     for (idx, bound) in cart_indices.iter_mut().rev().zip(dim_size.iter().rev()) {
         let remainder = index % *bound;
         index = index / *bound;
